@@ -1,0 +1,29 @@
+{
+  "name": "avltree",
+  "version": "1.0.0",
+  "description": "Implementation of an AVL Tree in JS, made for university project.",
+  "main": "server.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "jest",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krokowski0x/PAMSI-AVL-Tree.git"
+  },
+  "author": "Rafał Krókowski",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/krokowski0x/PAMSI-AVL-Tree/issues"
+  },
+  "homepage": "https://github.com/krokowski0x/PAMSI-AVL-Tree#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  },
+  "devDependencies": {
+    "jest": "^22.4.2"
+  }
+}
