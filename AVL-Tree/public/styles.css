@@ -19,6 +19,7 @@
   grid-template-columns: 60% 15% 15%;
   grid-template-rows: 20% 80%;
   grid-gap: 5%;
+  text-align: justify;
 }
 
 h1 {
@@ -123,7 +124,7 @@ input[type="text"] {
 
 .insert-node {
   display: grid;
-  grid-template-columns: 25% 25% 40%;
+  grid-template-columns: 55% 40%;
   grid-gap: 5%;
   margin: 4% 2%;
 }
@@ -180,14 +181,91 @@ input[type=radio]:checked + label{
 
 /* Tree information */
 table {
-  width: 96%;
-  border: 2px solid white;
+  width: 100%;
+  border: 1px solid white;
   border-radius: 5px;
   margin: 3% 2%;
+  z-index: -1;
 }
 
 th {
   border-bottom: 1px solid white;
   padding: 1%;
   text-align: left;
+}
+
+/* SNACKBAR */
+#snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: red;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+}
+
+#snackadd {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: green;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+}
+
+#snackexist {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: rgb(197, 157, 23);
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+}
+
+
+#snackbar.show, #snackadd.show, #snackexist.show  {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;} 
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;} 
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
 }

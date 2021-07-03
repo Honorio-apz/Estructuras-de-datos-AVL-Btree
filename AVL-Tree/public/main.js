@@ -22,7 +22,7 @@ function setup() {
 	}
 }
 
-function draw() {} // Required by p5, but not used here
+function draw() { } // Required by p5, but not used here
 
 // Event handlers
 document
@@ -38,8 +38,13 @@ document.getElementsByClassName("insertBtn")[0].addEventListener("click", e => {
 	e.preventDefault();
 
 	let key = document.getElementsByClassName("key")[0].value;
+	
+	
 	let val = document.getElementsByClassName("value")[0].value;
-
+	var i = arreglo.indexOf(key);
+	
+	if (i < 0) { this.mensajeAgregado(); }
+	else { this.mensajeExiste() };
 	tree.insertNode(key, val);
 
 	// Clear input fields
@@ -51,7 +56,11 @@ document.getElementsByClassName("removeBtn")[0].addEventListener("click", e => {
 	e.preventDefault();
 
 	let key = parseInt(document.getElementsByClassName("key")[1].value);
+	// console.log(arreglo)
+	var i = arreglo.indexOf(key);
 
+	//console.log(i);
+	if (i < 0) { this.alerta() };
 	tree.removeNode(key);
 
 	// Clear input field
@@ -69,6 +78,11 @@ document.getElementsByClassName("findBtn")[0].addEventListener("click", e => {
 	}
 
 	let key = parseInt(document.getElementsByClassName("key")[2].value);
+	var i = arreglo.indexOf(key);
+
+	//console.log(i);
+	if (i < 0) { this.alerta() };
+
 	let node = tree.find(key);
 
 	// Highlight a node
@@ -92,15 +106,15 @@ function updateInfo() {
 	let info = document.getElementsByClassName("tree-data")[0];
 	info.innerHTML = `
     <tr>
-      <th>Root:</th>
-      <th>${tree.root.key} // ${tree.root.value}</th>
+      <th>Nodo principal:</th>
+      <th>${tree.root.key}</th>
     </tr>
     <tr>
-      <th>Tree height:</th>
+      <th>Nivel Máximo de nodos:</th>
       <th>${tree.height}</th>
     </tr>
     <tr>
-      <th>Number of nodes:</th>
+      <th>Número de nodos:</th>
       <th>${tree.nodes}</th>
     </tr>
 	<tr>
@@ -113,4 +127,22 @@ function updateInfo() {
     </tr>
 
   `;
+}
+
+function alerta() {
+	var x = document.getElementById("snackbar");
+	x.className = "show";
+	setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+}
+
+function mensajeAgregado() {
+	var x = document.getElementById("snackadd");
+	x.className = "show";
+	setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+}
+
+function mensajeExiste() {
+	var x = document.getElementById("snackexist");
+	x.className = "show";
+	setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
 }
