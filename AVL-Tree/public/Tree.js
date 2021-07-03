@@ -9,27 +9,27 @@ class Tree {
 		this.menor = 0;
 	}
 
-	// Will be used for comparing node keys
+	// Se utilizará para comparar claves de nodo.
 	compare(a, b) {
 		return a > b ? 1 : a < b ? -1 : 0;
 	}
 
 	insertNode(key, data) {
-		// Make sure key is not a string
+		// Asegurar de que la clave no sea una string
 		arreglo.push(key)
 		this.ordenar();
 		
 		key = parseInt(key);
 		if (isNaN(key)) return 0;
 
-		// Don't insert if it's a duplicate
+		// No inserte si es un duplicado
 		if (this.find(key)) return 0;
 
-		// Phase 1 - regular BST insertion
+		// Fase 1: inserción regular 
 		let newNode = new Node(key, data);
 		let parent = this.root;
 
-		// When there's no root
+		// Cuando no hay raíz
 		if (!parent) {
 			this.root = newNode;
 			this.nodes++;
@@ -37,9 +37,9 @@ class Tree {
 			return this.root;
 		}
 
-		// Until newNode is not attached
+		// Hasta que no se adjunte en newNode
 		while (!newNode.parent) {
-			// Go left or right, update coords and attach to parent
+			//  A la izquierda o la derecha, actualiza las coordenadas y adjúnta al padre
 			if (this.compare(key, parent.key) === -1) {
 				if (!parent.left) {
 					parent.left = newNode;
@@ -57,22 +57,22 @@ class Tree {
 			}
 		}
 
-		// Phase 2 - Rebalancing tree
+		// Fase 2 - re balanceo de Árbol 
 		if (newNode.parent.parent) {
 			let gParent = newNode.parent.parent;
 			while (gParent) {
 				let balance = gParent.getBalance();
 
-				// Left Left Case
+				// caso izquiero iz
 				if (balance > 1 && key < gParent.left.key)
 					this.root = gParent.rotateLL(this.root);
-				// Right Right Case
+				// caso derecho der
 				else if (balance < -1 && key > gParent.right.key)
 					this.root = gParent.rotateRR(this.root);
-				// Left Right Case
+				// ezquiero - rerecho 
 				else if (balance > 1 && key > gParent.left.key)
 					this.root = gParent.rotateLR(this.root);
-				// Right Left Case
+				// derecha izquierda
 				else if (balance < -1 && key < gParent.right.key)
 					this.root = gParent.rotateRL(this.root);
 
@@ -80,11 +80,11 @@ class Tree {
 			}
 		}
 
-		this.nodes++; // Keep track of number of nodes
+		this.nodes++; //  cantidad de nodos
 		clear();
 		background(51);
-		maxpath = 0; // Keep track of tree height
-		this.preOrder(); // Re-render tree
+		maxpath = 0; //  altura del árbol
+		this.preOrder(); // VOlver a renderizar el árbol
 		this.height = maxpath;
 
 		updateInfo();
@@ -92,7 +92,7 @@ class Tree {
 	}
 
 	removeNode(key) {
-		// Phase 1 - regular BST deletion
+		// Fase 1: eliminación regular
 		
 		this.remover( arreglo, key);
 
@@ -102,18 +102,18 @@ class Tree {
 		let y = null; // Acts as a node
 		let z = null; // Acts as a new node's child
 
-		// If node has one or no children, y becomes node
+		// Si el nodo tiene uno o ningún hijo, y se convierte en nodo
 		if (node) {
 			
 
 			if (!node.left || !node.right) y = node;
 			else y = node.next();
 
-			// Append new child, which is z
+			// Agregar un nuevo hijo, que es z
 			if (y.left) z = y.left;
 			else z = y.right;
 
-			// Swap these nodes
+			// Intercambia estos nodos
 			if (z) z.parent = y.parent;
 			if (!y.parent) this.root = z;
 			else if (y === y.parent.left) y.parent.left = z;
@@ -121,39 +121,39 @@ class Tree {
 
 			if (y !== node) node.key = y.key;
 
-			// Phase 2 - Rebalancing tree
+			// Fase 2 - Árbol de reequilibrio
 			while (y) {
 				let balance = y.getBalance();
-				// Left Left Case
+				// izquierda iz
 				if (balance > 1 && y.left.getBalance() >= 0)
 					this.root = y.rotateLL(this.root);
-				// Right Right Case
+				// Rderecha dir
 				else if (balance < -1 && y.right.getBalance() <= 0)
 					this.root = y.rotateRR(this.root);
-				// Left Right Case
+				// izquierda recha
 				else if (balance > 1 && y.left.getBalance() < 0)
 					this.root = y.rotateLR(this.root);
-				// Right Left Case
+				// redecha izquierda
 				else if (balance < -1 && y.right.getBalance() > 0)
 					this.root = y.rotateRL(this.root);
 				y = y.parent;
 			}
 		} else {
-			return 0; // Do nothing if the node doesn't exists
+			return 0; // No hacer nada si el nodo no existe
 		}
 
-		this.nodes--; // Keep track of number of nodes
+		this.nodes--; // Mantenga un registro de la cantidad de nodos
 		clear();
 		background(51);
-		maxpath = 0; // Keep track of tree height
-		this.preOrder(); // Re-render tree
+		maxpath = 0; // Mantenga un registro de la altura del árbol
+		this.preOrder(); // Volver a renderizar el árbol
 		this.height = maxpath;
 		updateInfo();
 		return node;
 	}
 
 	find(nodeKey) {
-		// Start in the root
+		// Empiece la busqueda desde la raíz
 		let childNode = this.root;
 
 		while (childNode && nodeKey !== childNode.key) {

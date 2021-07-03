@@ -104,6 +104,8 @@ document.getElementsByClassName("findBtn")[0].addEventListener("click", e => {
 // 		e.preventDefault();
 // 	});
 
+
+//VISUALIZACION DE RESUMEN DE ARBOL
 function updateInfo() {
 	let info = document.getElementsByClassName("tree-data")[0];
 	info.innerHTML = `
